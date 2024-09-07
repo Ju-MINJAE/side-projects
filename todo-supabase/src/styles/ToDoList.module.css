@@ -1,0 +1,31 @@
+input {
+  padding: 8px;
+  font-size: 16px;
+}
+
+button {
+  margin-left: 8px;
+  padding: 8px 12px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  border-bottom: 1px solid lightgray;
+}
+
+span {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+span:hover {
+  opacity: 0.7;
+}
