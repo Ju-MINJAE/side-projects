@@ -9,11 +9,26 @@ const ToDoList = () => {
   const [newToDoTitle, setNewToDoTitle] = useState('');
   const [newDeadline, setNewDeadline] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    };
+
+    fetchUser();
+  }, []);
 
   const fetchTodos = async () => {
+    if (!user) return;
+
     const { data, error } = await supabase
       .from('todos')
       .select('*')
+      .eq('user_id', user.id)
       .order('id', { ascending: true });
 
     if (error) {
@@ -28,7 +43,7 @@ const ToDoList = () => {
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [user]);
 
   const toggleComplete = async (id, currentStatus) => {
     const { data, error } = await supabase
@@ -56,6 +71,7 @@ const ToDoList = () => {
             title: newToDoTitle,
             deadline: newDeadline,
             is_complete: false,
+            user_id: user.id,
           },
         ])
         .select();
@@ -75,7 +91,7 @@ const ToDoList = () => {
   };
 
   const deleteTodo = async (id) => {
-    const { error } = await supabase.from('todos').delete().eq('id', id);
+    const { error } = await supabase.from('taks').delete().eq('id', id);
 
     if (error) {
       console.error('Error deleting todo:', error);
