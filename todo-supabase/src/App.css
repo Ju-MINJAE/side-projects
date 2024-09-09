@@ -8,10 +8,10 @@ body {
 
 .container {
   position: relative;
-  top: 10vh;
-  max-width: 480px;
+  top: 6vh;
+  max-width: 30rem;
+  height: 35rem;
   margin: auto;
   background-color: #ffffff;
-  height: 640px;
   border-radius: 20px;
 }
