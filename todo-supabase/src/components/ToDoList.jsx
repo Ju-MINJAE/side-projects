@@ -1,5 +1,5 @@
 import { supabase } from '../supabaseClient';
-import { useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Modal from './Modal';
@@ -89,7 +89,7 @@ const ToDoList = () => {
     getDate();
   }, []);
 
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     if (!user) return;
 
     const { data, error } = await supabase
@@ -106,11 +106,11 @@ const ToDoList = () => {
     if (data) {
       dispatch({ type: 'SET_TODOS', payload: data });
     }
-  };
+  }, [user]);
 
   useEffect(() => {
-    if (user) fetchTodos();
-  }, [user]);
+    fetchTodos();
+  }, [fetchTodos]);
 
   const toggleComplete = async (id, currentStatus) => {
     const { data, error } = await supabase

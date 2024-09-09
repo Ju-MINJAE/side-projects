@@ -29,7 +29,7 @@ const reducer = (state, action) => {
 
 const Auth = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { email, password, isSignup, error } = state;
+  const { email, password, isSignup } = state;
 
   const navigate = useNavigate();
 
