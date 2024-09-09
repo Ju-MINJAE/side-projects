@@ -30,13 +30,17 @@ const Modal = ({
           onChange={(e) => setNewToDoTitle(e.target.value)}
           placeholder="New Task..."
           required
+          className={styles.inputText}
         />
         <input
           type="date"
           value={newDeadline}
           onChange={(e) => setNewDeadline(e.target.value)}
+          className={styles.inputDate}
         />
-        <button onClick={handleAddClick}>Add</button>
+        <button onClick={handleAddClick} className={styles.addButton}>
+          Add
+        </button>
       </div>
     </div>
   );

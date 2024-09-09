@@ -5,7 +5,6 @@ import { supabase } from './supabaseClient';
 import './App.css';
 import Auth from './components/Auth';
 import ToDoList from './components/ToDoList';
-import Nav from './components/Nav';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -41,8 +40,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {session && <Nav />}
-      <div>
+      <div className="container">
         <Routes>
           <Route
             path="/"
