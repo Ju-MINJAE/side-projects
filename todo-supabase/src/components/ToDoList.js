@@ -1,29 +1,67 @@
 import { supabase } from '../supabaseClient';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Modal from './Modal';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import styles from '../styles/ToDoList.module.css';
 
+const initialState = {
+  todos: [],
+  toDoTitle: '',
+  deadline: '',
+  isModalOpen: false,
+  user: null,
+  formattedDate: '',
+  weekday: '',
+};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_TODOS':
+      return { ...state, todos: action.payload };
+    case 'ADD_TODO':
+      return { ...state, todos: [...state.todos, action.payload] };
+    case 'SET_TODOTITLE':
+      return { ...state, toDoTitle: action.payload };
+    case 'SET_DEADLINE':
+      return { ...state, deadline: action.payload };
+    case 'TOGGLE_MODAL':
+      return { ...state, isModalOpen: !state.isModalOpen };
+    case 'CLOSE_MODAL':
+      return { ...state, isModalOpen: false };
+    case 'SET_USER':
+      return { ...state, user: action.payload };
+    case 'SET_FORMATTEDDATE':
+      return { ...state, formattedDate: action.payload };
+    case 'SET_WEEKDAY':
+      return { ...state, weekday: action.payload };
+    default:
+      return state;
+  }
+};
+
 const ToDoList = () => {
   const navigate = useNavigate();
 
-  const [todos, setTodos] = useState([]);
-  const [newToDoTitle, setNewToDoTitle] = useState('');
-  const [newDeadline, setNewDeadline] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const [formattedDate, setFormattedDate] = useState('');
-  const [weekday, setWeekday] = useState('');
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    todos,
+    toDoTitle,
+    deadline,
+    isModalOpen,
+    user,
+    formattedDate,
+    weekday,
+  } = state;
 
   useEffect(() => {
     const fetchUser = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      setUser(user);
+      dispatch({ type: 'SET_USER', payload: user });
     };
+
     const getDate = () => {
       const now = new Date();
       const dateOptions = {
@@ -44,9 +82,8 @@ const ToDoList = () => {
         'en-US',
         weekdayOptions
       ).format(now);
-
-      setFormattedDate(formattedDate);
-      setWeekday(formattedWeekday);
+      dispatch({ type: 'SET_FORMATTEDDATE', payload: formattedDate });
+      dispatch({ type: 'SET_WEEKDAY', payload: formattedWeekday });
     };
     fetchUser();
     getDate();
@@ -67,12 +104,12 @@ const ToDoList = () => {
     }
 
     if (data) {
-      setTodos(data);
+      dispatch({ type: 'SET_TODOS', payload: data });
     }
   };
 
   useEffect(() => {
-    fetchTodos();
+    if (user) fetchTodos();
   }, [user]);
 
   const toggleComplete = async (id, currentStatus) => {
@@ -88,18 +125,21 @@ const ToDoList = () => {
     }
 
     if (data) {
-      setTodos(todos.map((todo) => (todo.id === id ? data[0] : todo)));
+      dispatch({
+        type: 'SET_TODOS',
+        payload: todos.map((todo) => (todo.id === id ? data[0] : todo)),
+      });
     }
   };
 
   const addTodo = async () => {
-    if (newToDoTitle.trim()) {
+    if (toDoTitle.trim()) {
       const { data, error } = await supabase
         .from('todos')
         .insert([
           {
-            title: newToDoTitle,
-            deadline: newDeadline,
+            title: toDoTitle,
+            deadline: deadline,
             is_complete: false,
             user_id: user.id,
           },
@@ -112,10 +152,10 @@ const ToDoList = () => {
       }
 
       if (data && Array.isArray(data)) {
-        setTodos((prevTodos) => [...prevTodos, ...data]);
-        setNewToDoTitle('');
-        setNewDeadline('');
-        setIsModalOpen(false);
+        dispatch({ type: 'ADD_TODO', payload: data[0] });
+        dispatch({ type: 'SET_TODOTITLE', payload: '' });
+        dispatch({ type: 'SET_DEADLINE', payload: '' });
+        dispatch({ type: 'CLOSE_MODAL' });
       }
     }
   };
@@ -127,8 +167,10 @@ const ToDoList = () => {
       console.error('Error deleting todo:', error);
       return;
     }
-
-    setTodos(todos.filter((todo) => todo.id !== id));
+    dispatch({
+      type: 'SET_TODOS',
+      payload: todos.filter((todo) => todo.id !== id),
+    });
   };
 
   const logout = async () => {
@@ -174,17 +216,24 @@ const ToDoList = () => {
         </ul>
       </div>
 
-      <button onClick={() => setIsModalOpen(true)} className={styles.add__task}>
+      <button
+        onClick={() => dispatch({ type: 'TOGGLE_MODAL' })}
+        className={styles.add__task}
+      >
         + New Task
       </button>
       <Modal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => dispatch({ type: 'TOGGLE_MODAL' })}
         onAddTodo={addTodo}
-        newToDoTitle={newToDoTitle}
-        setNewToDoTitle={setNewToDoTitle}
-        newDeadline={newDeadline}
-        setNewDeadline={setNewDeadline}
+        newToDoTitle={toDoTitle}
+        setNewToDoTitle={(title) =>
+          dispatch({ type: 'SET_TODOTITLE', payload: title })
+        }
+        newDeadline={deadline}
+        setNewDeadline={(date) =>
+          dispatch({ type: 'SET_DEADLINE', payload: date })
+        }
       />
     </div>
   );
