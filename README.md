@@ -13,6 +13,14 @@
 <img src="https://github.com/user-attachments/assets/2c43d542-f2e1-4bf3-8b17-582e96a0fa20" width='700' />
 <img src="https://github.com/user-attachments/assets/d8687ed6-e2f6-436c-a27f-b2585f03009c" width='700' />
 
+<details>
+<summary>09/12 (OpenWeather API 사용, Medai Query) </summary>
+
+![1](https://github.com/user-attachments/assets/683d3a47-5f5c-4179-94d8-e605e406adc8)
+
+![2](https://github.com/user-attachments/assets/ed4920f4-1863-4be5-ae8f-54d0a64d7913)
+</details>
+
 ---
 ## 설치된 npm 패키지
 
