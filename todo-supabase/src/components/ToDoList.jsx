@@ -220,7 +220,7 @@ const ToDoList = () => {
         onClick={() => dispatch({ type: 'TOGGLE_MODAL' })}
         className={styles.add__task}
       >
-        + New Task
+        +
       </button>
       <Modal
         isOpen={isModalOpen}

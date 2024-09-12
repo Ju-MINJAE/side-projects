@@ -5,6 +5,7 @@ import { supabase } from './supabaseClient';
 import './App.css';
 import Auth from './components/Auth';
 import ToDoList from './components/ToDoList';
+import Weather from './components/Weather';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -41,15 +42,20 @@ function App() {
   return (
     <BrowserRouter>
       <div className="container">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              session ? <ToDoList /> : <Navigate to="/auth" replace={true} />
-            }
-          />
-          <Route path="/auth" element={<Auth />} />
-        </Routes>
+        <div className="weatherCard">
+          <Weather />
+        </div>
+        <div className="todoListCard">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                session ? <ToDoList /> : <Navigate to="/auth" replace={true} />
+              }
+            />
+            <Route path="/auth" element={<Auth />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );

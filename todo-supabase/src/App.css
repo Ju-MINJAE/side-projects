@@ -3,16 +3,30 @@
   padding: 0;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 body {
   background-color: rgb(243, 235, 226);
 }
 
 .container {
-  position: relative;
-  top: 6vh;
-  max-width: 30rem;
-  height: 35rem;
-  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
   background-color: #ffffff;
   border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 840px;
+  margin: 20px auto;
+}
+
+.weatherCard,
+.todoListCard {
+  flex: 1;
+  margin: 0 10px;
+  border-radius: 10px;
+  padding: 20px;
+}
+.todoListCard {
+  background-color: #e3dede1d;
+  box-shadow: 0 2px 4px rgba(146, 143, 143, 0.9);
 }

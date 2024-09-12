@@ -75,12 +75,14 @@ span:hover {
 }
 
 .add__task {
+  width: 50px;
+  height: 50px;
   position: relative;
   left: calc(50% - 50px);
   background-color: rgb(132, 164, 83);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 50%;
   padding: 14px;
   cursor: pointer;
   font-size: 16px;

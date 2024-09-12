@@ -1,0 +1,33 @@
+.weatherContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+
+  font-family: Arial, sans-serif;
+}
+
+.weatherHeader {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.weatherIcon {
+  width: 10rem;
+}
+.weatherDetails {
+  text-align: center;
+}
+.weatherDetails p {
+  margin: 5px 0;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.loading {
+  color: gray;
+  font-style: italic;
+}
