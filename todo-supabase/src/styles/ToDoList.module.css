@@ -112,3 +112,19 @@ span:hover {
 .delete__btn:hover {
   color: #c0392b;
 }
+
+@media screen and (max-width: 840px) {
+  .todo__container {
+    width: 30rem;
+    margin: auto;
+  }
+  .todo__list {
+    background-color: white;
+  }
+  .todo__footer {
+    width: 100%;
+    height: 4rem;
+    background-color: white;
+    border-radius: 0 0 20px 20px;
+  }
+}

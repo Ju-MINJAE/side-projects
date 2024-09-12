@@ -179,7 +179,7 @@ const ToDoList = () => {
   };
 
   return (
-    <div>
+    <div className={styles.todo__container}>
       <div className={styles.header}>
         <p>
           {formattedDate}
@@ -215,13 +215,14 @@ const ToDoList = () => {
           ))}
         </ul>
       </div>
-
-      <button
-        onClick={() => dispatch({ type: 'TOGGLE_MODAL' })}
-        className={styles.add__task}
-      >
-        +
-      </button>
+      <footer className={styles.todo__footer}>
+        <button
+          onClick={() => dispatch({ type: 'TOGGLE_MODAL' })}
+          className={styles.add__task}
+        >
+          +
+        </button>
+      </footer>
       <Modal
         isOpen={isModalOpen}
         onClose={() => dispatch({ type: 'TOGGLE_MODAL' })}

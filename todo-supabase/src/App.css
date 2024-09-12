@@ -30,3 +30,17 @@ body {
   background-color: #e3dede1d;
   box-shadow: 0 2px 4px rgba(146, 143, 143, 0.9);
 }
+
+@media screen and (max-width: 840px) {
+  .container {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .weatherCard {
+    display: none;
+  }
+  .todoListCard {
+    background-color: rgb(243, 235, 226);
+    box-shadow: none;
+  }
+}
