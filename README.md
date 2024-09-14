@@ -2,6 +2,7 @@
 <p>
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
   <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=for-the-badge&logo=ReactRouter&logoColor=white">
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">
   <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=Supabase&logoColor=white">
 </p>
 
@@ -21,6 +22,13 @@
 ![2](https://github.com/user-attachments/assets/ed4920f4-1863-4be5-ae8f-54d0a64d7913)
 </details>
 
+<details>
+  <summary>09/14 (Tailwind CSS)</summary>
+
+![tailwind](https://github.com/user-attachments/assets/73ee8162-9ab8-4240-8851-ef6b6bcef605)
+
+</details>
+
 ---
 ## 설치된 npm 패키지
 
@@ -29,3 +37,5 @@ npm install @supabase/supabase-js
 npm install react-router-dom
 
 npm install react-icons
+
+npm install -D tailwindcss postcss autoprefixer
