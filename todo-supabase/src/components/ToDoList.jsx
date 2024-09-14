@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Modal from './Modal';
 import { FaRegTrashAlt } from 'react-icons/fa';
-import styles from '../styles/ToDoList.module.css';
+import '../index.css';
 
 const initialState = {
   todos: [],
@@ -179,34 +179,44 @@ const ToDoList = () => {
   };
 
   return (
-    <div className={styles.todo__container}>
-      <div className={styles.header}>
-        <p>
+    <div className="h-full">
+      <div className="flex justify-between items-center w-full h-16 bg-green-300 rounded-t-2xl">
+        <p className="p-2 text-sm font-light">
           {formattedDate}
           <br />
           <strong>{weekday}</strong>
         </p>
-        <button className={styles.logout__btn} onClick={logout}>
+        <button
+          className="bg-green-700 text-white mr-3 py-1 px-3 rounded-md text-sm"
+          onClick={logout}
+        >
           Logout
         </button>
       </div>
-      <div className={styles.todo__list}>
-        <ul>
+      <div className="todo__list h-124 overflow-y-scroll bg-white p-4">
+        <ul className="list-none m-4 p-0">
           {todos.map((todo) => (
-            <li key={todo.id} className={styles.todo__item}>
-              <div className={styles.todo__content}>
+            <li
+              key={todo.id}
+              className="flex justify-between items-center p-2 bg-gray-100 mb-2 rounded-lg shadow-md"
+            >
+              <div className="flex flex-col">
                 <span
-                  className={`${styles.todo__title} ${
-                    todo.is_complete ? styles.completed : ''
+                  className={`text-lg font-semibold cursor-pointer ${
+                    todo.is_complete
+                      ? 'line-through text-gray-500'
+                      : 'text-gray-900'
                   }`}
                   onClick={() => toggleComplete(todo.id, todo.is_complete)}
                 >
                   {todo.title}
                 </span>
-                <span className={styles.todo__deadline}>~{todo.deadline}</span>
+                <span className="text-sm text-gray-600 mt-1">
+                  ~{todo.deadline}
+                </span>
               </div>
               <button
-                className={styles.delete__btn}
+                className="text-lg cursor-pointer hover:text-red-600"
                 onClick={() => deleteTodo(todo.id)}
               >
                 <FaRegTrashAlt />
@@ -215,10 +225,10 @@ const ToDoList = () => {
           ))}
         </ul>
       </div>
-      <footer className={styles.todo__footer}>
+      <footer className="flex justify-center items-center h-16 bg-white rounded-b-2xl">
         <button
           onClick={() => dispatch({ type: 'TOGGLE_MODAL' })}
-          className={styles.add__task}
+          className="w-12 h-12 bg-green-700 text-white rounded-full flex items-center justify-center text-2xl hover:bg-green-800 hover:scale-110 transition-transform duration-300"
         >
           +
         </button>

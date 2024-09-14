@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useReducer } from 'react';
-import styles from '../styles/Weather.module.css';
+import '../index.css';
 
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_KEY;
 
@@ -48,10 +48,8 @@ const Weather = () => {
 
       const iconCode = data.weather[0].icon;
       // console.log(iconCode);
-      // setIconCode(iconCode);
       dispatch({ type: 'ICON_CODE', payload: iconCode });
       const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
-      // setWeatherIconUrl(iconUrl);
       dispatch({ type: 'WEATHER_URL', payload: iconUrl });
     } catch (error) {
       console.error('에러 발생:', error);
@@ -94,33 +92,31 @@ const Weather = () => {
   };
 
   return (
-    <div className={styles.weatherContainer}>
-      <h2 className={styles.weatherHeader}>
+    <div className="flex flex-col items-center w-full h-[4rem] font-sans">
+      <h2 className="text-xl mb-2 font-bold">
         {weatherData
           ? `${weatherData.name}의 날씨`
           : '날씨 정보를 불러오는 중...'}
       </h2>
       {weatherData ? (
-        <div className={styles.weatherDetails}>
-          <img
-            src={weatherIconUrl}
-            alt="Weather icon"
-            className={styles.weatherIcon}
-          />
-          <p>온도: {weatherData.main.temp}°C</p>
-          <p>습도: {weatherData.main.humidity}%</p>
-          <p>바람 세기: {weatherData.wind.speed}</p>
-          <hr />
+        <div className="text-center">
+          <div className="flex justify-center mb-4">
+            <img src={weatherIconUrl} alt="Weather icon" className="w-40" />
+          </div>
+          <p className="my-1">온도: {weatherData.main.temp} °C</p>
+          <p className="my-1">습도: {weatherData.main.humidity} %</p>
+          <p className="my-1">바람 세기: {weatherData.wind.speed} m/s</p>
+          <hr className="my-4" />
           {iconCode in weatherMessages && (
-            <h3 style={{ marginTop: '20px' }}>
+            <h3 className="mt-5 font-semibold">
               {weatherMessages[iconCode].message}
             </h3>
           )}
         </div>
       ) : error ? (
-        <p className={styles.error}>에러: {error}</p>
+        <p className="text-red-500 font-bold">에러: {error}</p>
       ) : (
-        <p className={styles.loading}>잠시만 기다려주세요 !</p>
+        <p className="text-gray-500 italic">잠시만 기다려주세요 !</p>
       )}
     </div>
   );
