@@ -10,9 +10,15 @@
 
 #### Supabase를 사용해보고자 만든 ToDo 애플리케이션입니다. 
 #### Supabase의 데이터베이스와 사용자 인증 기능을 활용해 간단한 ToDo 리스트를 구현했습니다.
+
+<details>
+  <summary>09/07 (Supabase 사용)</summary>
+  
 <img src="https://github.com/user-attachments/assets/03c10f74-ddde-4ce2-8a5b-2b406344f951" width='700' />
 <img src="https://github.com/user-attachments/assets/2c43d542-f2e1-4bf3-8b17-582e96a0fa20" width='700' />
 <img src="https://github.com/user-attachments/assets/d8687ed6-e2f6-436c-a27f-b2585f03009c" width='700' />
+</details>
+
 
 <details>
 <summary>09/12 (OpenWeather API 사용, Medai Query) </summary>
