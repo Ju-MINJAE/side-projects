@@ -19,6 +19,7 @@ function App() {
     });
     _socket.connect();
     setSocket(_socket);
+    setUsername('');
   };
 
   const disconnectToChatServer = () => {
@@ -45,6 +46,7 @@ function App() {
         console.log(response);
       }
     );
+    setUserInput('');
   };
 
   const onMessageReceived = (msg) => {
@@ -79,9 +81,9 @@ function App() {
   ));
 
   return (
-    <>
+    <div>
       <div className="main">
-        <h2 className="username-display">username : {username}</h2>
+        <h2 className="username-display">사용자 이름 : {username}</h2>
         <h3 className="connection-status">
           접속상태 : {isConnected ? '접속중..' : '미접속중..'}
         </h3>
@@ -102,20 +104,22 @@ function App() {
         </div>
       </div>
 
-      <div className="card">
-        <input
-          type="text"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          className="input-field"
-          placeholder="Enter message"
-        />
-        <button onClick={sendMessageToChatServer} className="send-btn">
-          전송
-        </button>
-      </div>
+      {isConnected && (
+        <div className="card">
+          <input
+            type="text"
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            className="input-field"
+            placeholder="Enter message"
+          />
+          <button onClick={sendMessageToChatServer} className="send-btn">
+            전송
+          </button>
+        </div>
+      )}
       <ul className="message-list">{messageList}</ul>
-    </>
+    </div>
   );
 }
 
