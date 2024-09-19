@@ -24,15 +24,15 @@
   <details>
     <summary>09/12 (OpenWeather API 사용, Medai Query) </summary>
 
-  ![1](https://github.com/user-attachments/assets/683d3a47-5f5c-4179-94d8-e605e406adc8)
+  <img src="https://github.com/user-attachments/assets/683d3a47-5f5c-4179-94d8-e605e406adc8" width='700' />
 
-  ![2](https://github.com/user-attachments/assets/ed4920f4-1863-4be5-ae8f-54d0a64d7913)
+  <img src="https://github.com/user-attachments/assets/ed4920f4-1863-4be5-ae8f-54d0a64d7913" heigth='600' />
   </details>
 
   <details>
     <summary>09/14 (Tailwind CSS)</summary>
 
-  ![tailwind](https://github.com/user-attachments/assets/73ee8162-9ab8-4240-8851-ef6b6bcef605)
+  <img src="https://github.com/user-attachments/assets/73ee8162-9ab8-4240-8851-ef6b6bcef605" width='700' />
 
   </details>
 </details>
@@ -42,7 +42,7 @@
 <details>
   <summary>ChatApp</summary>
     
-![1](https://github.com/user-attachments/assets/2c0942ef-8a60-4ac4-9a37-7dcfb38d6a1d)
+<img src="https://github.com/user-attachments/assets/2c0942ef-8a60-4ac4-9a37-7dcfb38d6a1d" heigth='600' />
 
 [https://github.com/user-attachments/assets/4c414a91-7a9f-4a36-bf33-e07521a334c3](https://github.com/user-attachments/assets/30a5e068-b9e5-4467-bac7-d5b5b82ed0c6
 )
