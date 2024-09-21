@@ -1,62 +1,40 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { io } from 'socket.io-client';
 
-const initialState = {
-  socket: null,
-  username: '',
-  userInput: '',
-  isConnected: false,
-  messages: [],
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'SOCKET':
-      return { ...state, socket: action.payload };
-    case 'USER_NAME':
-      return { ...state, username: action.payload };
-    case 'USER_INPUT':
-      return { ...state, userInput: action.payload };
-    case 'IS_CONNECTED':
-      return { ...state, isConnected: !state.isConnected };
-    case 'ADD_MESSAGE':
-      return { ...state, messages: [...state.messages, action.payload] };
-    case 'CLEAR_MESSAGES':
-      return { ...state, messages: [] };
-    default:
-      return state;
-  }
-};
-
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { socket, username, userInput, isConnected, messages } = state;
+  const [socket, setSocket] = useState(null);
+  const [username, setUsername] = useState('');
+  const [userInput, setUserInput] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
+  const [messages, setMessages] = useState([]);
 
   const connectToChatServer = () => {
     console.log('connectToChatServer');
     const _socket = io('http://localhost:3000', {
       autoConnect: false,
-      query: { username },
+      query: {
+        username: username,
+      },
     });
     _socket.connect();
-    dispatch({ type: 'SOCKET', payload: _socket });
+    setSocket(_socket);
+    setUsername('');
   };
 
   const disconnectToChatServer = () => {
-    console.log('사용자가 나갔습니다.');
+    console.log(`사용자가 나갔습니다.`);
     socket?.disconnect();
   };
 
   const onConnected = () => {
     console.log('프론트 - onConnected');
-    dispatch({ type: 'IS_CONNECTED' });
+    setIsConnected(true);
   };
 
   const onDisconnected = () => {
-    console.log('프론트 - onDisconnected');
-    dispatch({ type: 'IS_CONNECTED' });
-    dispatch({ type: 'USER_NAME', payload: '' });
+    console.log('프론트 - onConnected');
+    setIsConnected(false);
   };
 
   const sendMessageToChatServer = () => {
@@ -68,13 +46,13 @@ function App() {
         console.log(response);
       }
     );
-    dispatch({ type: 'USER_INPUT', payload: '' });
+    setUserInput('');
   };
 
   const onMessageReceived = (msg) => {
     console.log('프론트 - onMessageReceived');
     console.log(msg);
-    dispatch({ type: 'ADD_MESSAGE', payload: msg });
+    setMessages((prev) => [...prev, msg]);
   };
 
   useEffect(() => {
@@ -83,7 +61,7 @@ function App() {
   }, [messages]);
 
   useEffect(() => {
-    console.log('useEffect called!');
+    console.log('useEffect callied!');
     socket?.on('connect', onConnected);
     socket?.on('disconnect', onDisconnected);
     socket?.on('new message', onMessageReceived);
@@ -113,22 +91,16 @@ function App() {
           <input
             type="text"
             value={username}
-            onChange={(e) =>
-              dispatch({ type: 'USER_NAME', payload: e.target.value })
-            }
+            onChange={(e) => setUsername(e.target.value)}
             className="input-field"
             placeholder="Enter username"
           />
-          {!isConnected && (
-            <button onClick={connectToChatServer} className="connect-btn">
-              접속
-            </button>
-          )}
-          {isConnected && (
-            <button onClick={disconnectToChatServer} className="disconnect-btn">
-              접속종료
-            </button>
-          )}
+          <button onClick={connectToChatServer} className="connect-btn">
+            접속
+          </button>
+          <button onClick={disconnectToChatServer} className="disconnect-btn">
+            접속종료
+          </button>
         </div>
       </div>
 
@@ -137,9 +109,7 @@ function App() {
           <input
             type="text"
             value={userInput}
-            onChange={(e) =>
-              dispatch({ type: 'USER_INPUT', payload: e.target.value })
-            }
+            onChange={(e) => setUserInput(e.target.value)}
             className="input-field"
             placeholder="Enter message"
           />
