@@ -2,15 +2,18 @@
 <details>
     <summary>todo-supabase</summary>
 
-  <p>
+  <div align='center'>
     <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
     <img src="https://img.shields.io/badge/ReactRouter-CA4245?style=for-the-badge&logo=ReactRouter&logoColor=white">
     <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">
     <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=for-the-badge&logo=Supabase&logoColor=white">
-  </p>
 
-  #### Supabase를 사용해보고자 만든 ToDo 애플리케이션입니다. 
-  #### Supabase의 데이터베이스와 사용자 인증 기능을 활용해 간단한 ToDo 리스트를 구현했습니다.
+#### Supabase를 사용해보고자 만든 ToDo 애플리케이션입니다. 
+    
+#### Supabase의 데이터베이스와 사용자 인증 기능을 활용해 간단한 ToDo 리스트를 구현했습니다.
+  </div>
+
+  
 
   <details>
     <summary>09/07 (Supabase 사용)</summary>
@@ -41,6 +44,12 @@
 
 <details>
   <summary>ChatApp</summary>
+
+ <div align='center'>
+      
+<img src="https://img.shields.io/badge/Socket-010101?style=for-the-badge&logo=Socket.io&logoColor=white">
+
+ </div>
     
 <img src="https://github.com/user-attachments/assets/2c0942ef-8a60-4ac4-9a37-7dcfb38d6a1d" heigth='600' />
 
